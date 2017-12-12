@@ -13,6 +13,13 @@
                             Home
                             <span class="sr-only">(current)</span>
                         </router-link>
+
+                    </li>
+
+                    <li class="nav-item">
+                        <router-link :to="{name: 'app-brandlist'}" class="nav-link">
+                            Brands
+                        </router-link>
                     </li>
                     <li class="nav-item">
                         <router-link to="/" class="nav-link">Form Test</router-link>
