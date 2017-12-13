@@ -4,7 +4,7 @@ from flask_cors import CORS
 
 from HomeResource import HomeResource, TestHomeResource
 from resources.CarResource import CarResource
-from resources.BrandResource import BrandResource
+from resources.BrandResource import BrandResource, FindOneBrandResource
 
 
 app = Flask(__name__)
@@ -14,10 +14,11 @@ CORS(app)
 api.add_resource(HomeResource, '/')
 api.add_resource(TestHomeResource, '/test')
 
-#Car Resources
+# Car Resources
 api.add_resource(CarResource, '/cars')
 
-#Brand Resources
+# Brand Resources
 api.add_resource(BrandResource, '/brands')
+api.add_resource(FindOneBrandResource, '/brands/<string:id>')
 
 app.run(debug=True, port=5000)

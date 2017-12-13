@@ -9,7 +9,7 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
-                        <router-link to="vueHome" class="nav-link">
+                        <router-link to="/" class="nav-link">
                             Home
                             <span class="sr-only">(current)</span>
                         </router-link>
@@ -22,7 +22,6 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link to="/" class="nav-link">Form Test</router-link>
                     </li>
                 </ul>
             </div>
