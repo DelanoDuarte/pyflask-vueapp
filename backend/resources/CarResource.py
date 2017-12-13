@@ -50,6 +50,7 @@ class CarResource(Resource):
 class CarFindResource(Resource):
 
     mongoConnection = MongoConnection()
+    carsDocument = mongoConnection.mongoConnection['cars']
 
     def get(self, id):
         pass

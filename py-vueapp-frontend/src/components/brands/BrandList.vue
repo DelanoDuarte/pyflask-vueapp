@@ -2,6 +2,13 @@
     <div class="app-brandlist">
         <div class="col-md-12">
 
+            <div align='center'>
+                <img src="https://cdn4.iconfinder.com/data/icons/transport-flat-icons-vol-1/256/39-128.png" width="128px" height="128px">
+                <br />
+                <h2>Brand List </h2>
+            </div>
+
+            <hr>
             <app-brand-grid-component :brands='brands.data' />
 
             <hr />
