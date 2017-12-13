@@ -17,14 +17,14 @@ class BrandResource(Resource):
             brand['_id'] = str(brand['_id'])
             brandsJson.append(brand)
 
-        return {'brands': brandsJson}
+        return {'data': brandsJson}
 
     def post(self):
 
-        name = request.json['name']
-        active = request.json['active']
+        brandJson = request.json['brand']
+        print(brandJson)
 
-        brand = Brand(name, active)
+        brand = Brand(brandJson['name'], brandJson['active'])
 
         new_brand = {
             'name': brand.name,
