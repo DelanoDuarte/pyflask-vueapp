@@ -21,9 +21,7 @@ class BrandResource(Resource):
         return {'data': brandsJson}
 
     def post(self):
-
         brandJson = request.json['brand']
-        print(brandJson)
 
         brand = Brand(brandJson['name'], brandJson['active'])
 
@@ -48,7 +46,10 @@ class FindOneBrandResource(Resource):
     def get(self, id):
         brand = self.brandDocument.find_one({'_id': ObjectId(id)})
 
+        brandId = brand['_id'] = str(brand['_id'])
+
         brand_finded = {
+            '_id': brandId,
             'name': brand['name'],
             'active': brand['active']
         }
@@ -68,3 +69,7 @@ class FindOneBrandResource(Resource):
             {'_id': ObjectId(id)}, {'$set': brand_update})
 
         return {'brand': brand_update}
+
+    def delete(self, id):
+        brand = self.brandDocument.delete_one({'_id': ObjectId(id)})
+        return {'brand': 'brand deleted'}, 200

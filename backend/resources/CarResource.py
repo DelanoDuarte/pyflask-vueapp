@@ -20,31 +20,27 @@ class CarResource(Resource):
         return {'cars': carsJson}
 
     def post(self):
+        car = request.json['car']
+        new_car = Car(car['model'], car['brand'], car['price'], car['year'])
 
-        model = request.json['model']
-        brand = request.json['brand']
-        price = request.json['price']
-        year = request.json['year']
-
-        car = Car(model, brand, price, year)
-
-        new_car = {
-            'model': car.model,
-            'brand': car.brand,
-            'price': car.price,
-            'year': car.year
-        }
-
-        self.carsDocument.insert_one(
+        result = self.carsDocument.insert_one(
             {
-                'model': car.model,
-                'brand': car.brand,
-                'price': car.price,
-                'year': car.year
+                'model': new_car.model,
+                'brand': new_car.brand,
+                'price': new_car.price,
+                'year': new_car.year
             }
         )
 
-        return new_car, 201
+        car_json = {
+            'carId': str(result.inserted_id),
+            'model': new_car.model,
+            'brand': new_car.brand,
+            'price': new_car.price,
+            'year': new_car.year
+        }
+
+        return {'car': car_json}, 201
 
 
 class CarFindResource(Resource):

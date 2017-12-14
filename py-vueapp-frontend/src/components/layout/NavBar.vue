@@ -22,6 +22,11 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
+                        <router-link :to="{name: 'app-cars-list'}" class="nav-link">
+                            Car
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
                     </li>
                 </ul>
             </div>
