@@ -9,6 +9,10 @@ import BrandSave from '@/components/brands/BrandSave'
 import BrandList from '@/components/brands/BrandList'
 import EditBrand from '@/components/brands/EditBrand'
 
+/** Car Components*/
+import CarList from '@/components/car/CarList'
+
+
 Vue.use(Router)
 
 export default new Router({
@@ -46,6 +50,13 @@ export default new Router({
       name: 'app-brand-edit',
       component: EditBrand,
       alias: 'app-brand-edit'
+    },
+
+    {
+      path: '/cars',
+      name: 'app-cars-list',
+      component: CarList,
+      alias: 'app-cars-list'
     }
   ]
 })

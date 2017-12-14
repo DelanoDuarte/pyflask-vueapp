@@ -4,6 +4,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import ModalComponent from './components/modal-component/ModalComponent'
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
