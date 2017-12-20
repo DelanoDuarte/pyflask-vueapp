@@ -3,7 +3,7 @@ from flask_restful import Api
 from flask_cors import CORS
 
 from HomeResource import HomeResource, TestHomeResource
-from resources.CarResource import CarResource
+from resources.CarResource import CarResource, CarFindResource
 from resources.BrandResource import BrandResource, FindOneBrandResource
 
 
@@ -16,6 +16,7 @@ api.add_resource(TestHomeResource, '/test')
 
 # Car Resources
 api.add_resource(CarResource, '/cars')
+api.add_resource(CarFindResource, '/cars/<string:id>')
 
 # Brand Resources
 api.add_resource(BrandResource, '/brands')

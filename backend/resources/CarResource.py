@@ -2,6 +2,7 @@ from flask_restful import Resource
 from flask import request
 from config.mongoconnection import MongoConnection
 from models.car import Car
+from pymongo.collection import ObjectId
 
 
 class CarResource(Resource):
@@ -49,4 +50,15 @@ class CarFindResource(Resource):
     carsDocument = mongoConnection.mongoConnection['cars']
 
     def get(self, id):
-        pass
+        car = self.carsDocument.find_one({'_id': ObjectId(id)})
+        carId = car['_id'] = str(car['_id'])
+
+        car_finded = {
+            'carId': carId,
+            'model': car['model'],
+            'brand': car['brand'],
+            'price': car['price'],
+            'year': car['year']
+        }
+
+        return car_finded, 200
