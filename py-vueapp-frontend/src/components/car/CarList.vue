@@ -13,7 +13,7 @@
 
             <hr />
             <div class="row">
-                <router-link :to="{name: ''}" class="btn btn-primary">
+                <router-link :to="{name: 'app-cars-save'}" class="btn btn-primary">
                     New Car
                 </router-link>
             </div>

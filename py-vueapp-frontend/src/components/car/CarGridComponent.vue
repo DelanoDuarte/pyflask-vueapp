@@ -18,7 +18,7 @@
                     <td> {{car.year}}</td>
                     <td>
                         <div class="text-center">
-                            <router-link :to="{name:'', params:{'id':car._id}}" class="btn btn-success">Edit</router-link>
+                            <router-link :to="{name:'app-cars-edit', params:{'id':car._id}}" class="btn btn-success">Edit</router-link>
                         </div>
                     </td>
                 </tr>
