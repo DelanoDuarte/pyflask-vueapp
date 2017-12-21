@@ -72,7 +72,7 @@ export default {
                 this.updateCar();
                 return
             }
-            //this.saveCar()
+            this.saveCar()
         },
 
         saveCar() {
@@ -81,18 +81,28 @@ export default {
                 headers: { 'Content-Type': 'application/json' },
                 method: 'POST',
                 body: data,
+            }).then(res => {
+                res.json()
+                    .then(res => {
+                        console.log(res.data)
+                        this.$router.push({ name: 'app-cars-list' })
+                    })
             })
-                .then(res => {
-                    res.json()
-                        .then(res => {
-                            console.log(res.data)
-                            this.$router.push({ name: 'app-cars-list' })
-                        })
-                })
         },
 
         updateCar() {
-            console.log('Updating Car')
+            let data = JSON.stringify({ 'car': this.car });
+            fetch(`http://127.0.0.1:5000/py-vue/api/cars/${this.car.carId}`, {
+                headers: { 'Content-Type': 'application/json' },
+                method: 'PUT',
+                body: data,
+            }).then(res => {
+                res.json()
+                    .then(res => {
+                        console.log(res.data)
+                        this.$router.push({ name: 'app-cars-list' })
+                    })
+            })
         }
 
     }

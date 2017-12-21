@@ -62,3 +62,29 @@ class CarFindResource(Resource):
         }
 
         return car_finded, 200
+
+    def put(self, id):
+
+        car_request = request.json['car']
+
+        car_update = {
+            'model': car_request['model'],
+            'brand': car_request['brand'],
+            'price': car_request['price'],
+            'year': car_request['year']
+        }
+
+        self.carsDocument.update_one(
+            {
+                '_id': ObjectId(id)
+            },
+            {
+                '$set': car_update
+            }
+        )
+
+        return {'car': car_update}, 200
+
+    def delete(self, id):
+        car_delete = self.carsDocument.delete_one({'_id': ObjectId(id)})
+        return {'Brand': 'Brand Deleted'}, 200
