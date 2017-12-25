@@ -74,7 +74,9 @@ export default {
                 .then(res => res.json()
                     .then(res => {
                         console.log(res)
-                        this.$emit(console.log('emited event'))
+                        this.$emit('refreshCars', () => {
+                            console.log('event emited for parent')
+                        })
                     }))
         }
 
