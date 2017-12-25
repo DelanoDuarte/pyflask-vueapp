@@ -9,7 +9,7 @@
             </div>
 
             <hr>
-            <CarGridComponent :cars='cars' />
+            <CarGridComponent :cars='cars' v-on:refreshCars="refreshCarGrid" />
 
             <hr />
             <div class="row">
@@ -48,6 +48,14 @@ export default {
                     .then(res => {
                         this.cars = res.cars
                     }))
+        },
+
+        refreshCarGrid() {
+            this.getCarsJson();
+        },
+
+        showMessage() {
+
         }
     }
 }

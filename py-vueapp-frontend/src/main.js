@@ -6,6 +6,8 @@ import router from './router'
 
 import ModalComponent from './components/modal-component/ModalComponent'
 
+import Message from './components/message/Message'
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -15,3 +17,9 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+// new Vue({
+//   el: '#app-message',
+//   template: '<Message/>',
+//   components: { Message }
+// })

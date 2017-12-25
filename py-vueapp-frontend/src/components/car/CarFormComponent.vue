@@ -41,13 +41,19 @@
 </template>
 
 <script>
+import Message from './../message/Message'
+
 export default {
     name: 'app-car-form-component',
     props: ['car'],
+    components: {
+        'Message': Message
+    },
 
     data() {
         return {
-            brands: []
+            brands: [],
+            showMessage: false
         }
     },
 
@@ -85,6 +91,7 @@ export default {
                 res.json()
                     .then(res => {
                         console.log(res.data)
+                        this.$emit('saved')
                         this.$router.push({ name: 'app-cars-list' })
                     })
             })
