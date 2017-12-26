@@ -92,6 +92,7 @@ export default {
                     .then(res => {
                         console.log(res.data)
                         this.$emit('saved')
+                        //flash('New Car Sucessfuly Saved !', 'success')
                         this.$router.push({ name: 'app-cars-list' })
                     })
             })
