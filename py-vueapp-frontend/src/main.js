@@ -5,17 +5,24 @@ import App from './App'
 import router from './router'
 
 import ModalComponent from './components/modal-component/ModalComponent'
+import VueFlash from 'vue-flash'
+
 
 import Message from './components/message/Message'
 
 Vue.config.productionTip = false
+
+Vue.component('flash', VueFlash)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App }
+  components: {
+    App,
+    VueFlash
+  }
 })
 
 // new Vue({
