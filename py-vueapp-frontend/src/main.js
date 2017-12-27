@@ -7,12 +7,15 @@ import router from './router'
 import ModalComponent from './components/modal-component/ModalComponent'
 import VueFlash from 'vue-flash'
 
+import StarRating from 'vue-star-rating'
+
 
 import Message from './components/message/Message'
 
 Vue.config.productionTip = false
 
 Vue.component('flash', VueFlash)
+Vue.component('star-rating', StarRating)
 
 /* eslint-disable no-new */
 new Vue({
@@ -20,8 +23,7 @@ new Vue({
   router,
   template: '<App/>',
   components: {
-    App,
-    VueFlash
+    App
   }
 })
 

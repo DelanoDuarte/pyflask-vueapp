@@ -12,6 +12,7 @@ import EditBrand from '@/components/brands/EditBrand'
 /** Car Components*/
 import CarList from '@/components/car/CarList'
 import CarSave from '@/components/car/CarSave'
+import CarEvaluation from '@/components/car/CarEvaluation'
 
 
 Vue.use(Router)
@@ -70,6 +71,12 @@ export default new Router({
       name: 'app-cars-edit',
       component: CarSave,
       alias: 'app-cars-edit'
+    },
+    {
+      path: '/car/evaluate/:id',
+      name: 'app-cars-evaluation',
+      component: CarEvaluation,
+      alias: 'app-cars-evaluation'
     }
   ]
 })

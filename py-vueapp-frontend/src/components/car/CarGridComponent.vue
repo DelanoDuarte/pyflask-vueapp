@@ -19,6 +19,7 @@
                     <td>
                         <div class="text-center">
                             <router-link :to="{name:'app-cars-edit', params:{'id':car._id}}" class="btn btn-success">Edit</router-link>
+                            <router-link :to="{name:'app-cars-evaluation', params:{'id':car._id}}" class="btn btn-primary">Evaluate This Car</router-link>
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" @click="showModal(car)">Delete </button>
                         </div>
                     </td>
