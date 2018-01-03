@@ -19,7 +19,7 @@
                     <td>
                         <div class="text-center">
                             <router-link :to="{name:'app-cars-edit', params:{'id':car._id}}" class="btn btn-success">Edit</router-link>
-                            <router-link :to="{name:'app-cars-evaluation', params:{'id':car._id}}" class="btn btn-primary">Evaluate This Car</router-link>
+                            <router-link :to="{name:'app-cars-evaluation', params:{'id':car._id}}" class="btn btn-primary"  v-if="!car.evaluated">Evaluate This Car</router-link>                            
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" @click="showModal(car)">Delete </button>
                         </div>
                     </td>
@@ -53,36 +53,34 @@
 
 <script>
 export default {
-    name: 'app-cars-grid-component',
-    props: ['cars'],
+  name: "app-cars-grid-component",
+  props: ["cars"],
 
-    data() {
-        return {
-            car: ''
-        }
+  data() {
+    return {
+      car: ""
+    };
+  },
+
+  methods: {
+    showModal(car) {
+      this.car = car;
     },
 
-    methods: {
-
-        showModal(car) {
-            this.car = car
-        },
-
-        deleteCar() {
-            fetch(`http://127.0.0.1:5000/py-vue/api/cars/${this.car._id}`, {
-                method: 'DELETE'
-            })
-                .then(res => res.json()
-                    .then(res => {
-                        console.log(res)
-                        this.$emit('refreshCars', () => {
-                            console.log('event emited for parent')
-                        })
-                    }))
-        }
-
+    deleteCar() {
+      fetch(`http://127.0.0.1:5000/py-vue/api/cars/${this.car._id}`, {
+        method: "DELETE"
+      }).then(res =>
+        res.json().then(res => {
+          console.log(res);
+          this.$emit("refreshCars", () => {
+            console.log("event emited for parent");
+          });
+        })
+      );
     }
-}
+  }
+};
 </script>
 
 <style>

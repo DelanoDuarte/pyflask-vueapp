@@ -29,7 +29,8 @@ class CarResource(Resource):
                 'model': new_car.model,
                 'brand': new_car.brand,
                 'price': new_car.price,
-                'year': new_car.year
+                'year': new_car.year,
+                'evaluated': False
             }
         )
 
@@ -38,7 +39,8 @@ class CarResource(Resource):
             'model': new_car.model,
             'brand': new_car.brand,
             'price': new_car.price,
-            'year': new_car.year
+            'year': new_car.year,
+            'evaluated': new_car.evaluated
         }
 
         return {'car': car_json}, 201

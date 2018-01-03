@@ -26,10 +26,20 @@ class CarEvaluationResource(Resource):
             'model': car['model'],
             'brand': car['brand'],
             'price': car['price'],
-            'year': car['year']
+            'year': car['year'],
+            'evaluated': car['evaluated']
         }
 
-        print(car_finded)
+        car_finded['evaluated'] = True
+
+        self.carsDocument.update_one(
+            {
+                '_id': carId
+            },
+            {
+                '$set': car_finded
+            }
+        )
 
         car_evaluation_object = CarEvaluation(
             car_finded,
