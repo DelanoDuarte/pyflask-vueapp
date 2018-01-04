@@ -7,8 +7,42 @@ class CarBusiness:
     mongoConnection = MongoConnection()
     carsDocument = mongoConnection.mongoConnection['cars']
 
-    def saveCar(self):
-        pass
+    def findAll(self):
+        cars = self.carsDocument.find({})
+        carsJson = []
+
+        for car in cars:
+            car['_id'] = str(car['_id'])
+            carsJson.append(car)
+
+        car_list = {
+            'cars': carsJson
+        }
+
+        return car_list
+
+    def saveCar(self, car):
+
+        result = self.carsDocument.insert_one(
+            {
+                'model': car.model,
+                'brand': car.brand,
+                'price': car.price,
+                'year': car.year,
+                'evaluated': False
+            }
+        )
+
+        car_saved = {
+            'carId': str(result.inserted_id),
+            'model': car.model,
+            'brand': car.brand,
+            'price': car.price,
+            'year': car.year,
+            'evaluated': car.evaluated
+        }
+
+        return car_saved
 
     def updateCar(self, carId, car):
 
