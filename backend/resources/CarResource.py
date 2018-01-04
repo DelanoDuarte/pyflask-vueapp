@@ -4,6 +4,8 @@ from config.mongoconnection import MongoConnection
 from models.car import Car
 from pymongo.collection import ObjectId
 
+from business.CarBusiness import CarBusiness
+
 
 class CarResource(Resource):
 
@@ -11,39 +13,23 @@ class CarResource(Resource):
     carsDocument = mongoConnection.mongoConnection['cars']
 
     def get(self):
-        cars = self.carsDocument.find({})
-        carsJson = []
 
-        for car in cars:
-            car['_id'] = str(car['_id'])
-            carsJson.append(car)
+        carBusiness = CarBusiness()
 
-        return {'cars': carsJson}
+        cars = carBusiness.findAll()
+
+        return cars, 200
 
     def post(self):
+
+        carBusiness = CarBusiness()
+
         car = request.json['car']
         new_car = Car(car['model'], car['brand'], car['price'], car['year'])
 
-        result = self.carsDocument.insert_one(
-            {
-                'model': new_car.model,
-                'brand': new_car.brand,
-                'price': new_car.price,
-                'year': new_car.year,
-                'evaluated': False
-            }
-        )
+        car = carBusiness.saveCar(new_car)
 
-        car_json = {
-            'carId': str(result.inserted_id),
-            'model': new_car.model,
-            'brand': new_car.brand,
-            'price': new_car.price,
-            'year': new_car.year,
-            'evaluated': new_car.evaluated
-        }
-
-        return {'car': car_json}, 201
+        return car, 201
 
 
 class CarFindResource(Resource):
@@ -52,16 +38,9 @@ class CarFindResource(Resource):
     carsDocument = mongoConnection.mongoConnection['cars']
 
     def get(self, id):
-        car = self.carsDocument.find_one({'_id': ObjectId(id)})
-        carId = car['_id'] = str(car['_id'])
+        carBusiness = CarBusiness()
 
-        car_finded = {
-            'carId': carId,
-            'model': car['model'],
-            'brand': car['brand'],
-            'price': car['price'],
-            'year': car['year']
-        }
+        car_finded = carBusiness.findCarById(id)
 
         return car_finded, 200
 
