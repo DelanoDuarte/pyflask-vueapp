@@ -3,9 +3,16 @@
         <form v-on:submit.prevent="savenNewCar">
 
             <div class="row">
-                <div class="form-group col-md-8">
+                <div class="form-group col-md-4">
                     <label for="carModel">Car Model</label>
                     <input type="text" required class="form-control" v-model="car.model" id="carModel" placeholder="Lexus 2.0, Yellow Camaro 2.0">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="carBrand">Car Type</label>
+                    <select v-model="car.car_type" class="form-control" id="carType" required>
+                        <option selected>Select </option>
+                        <option v-for="carType in carTypes" v-bind:key="carType._id" :value="carType">{{carType.name}} </option>
+                    </select>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="carBrand">Brand</label>
@@ -41,80 +48,84 @@
 </template>
 
 <script>
-import Message from './../message/Message'
+import Message from "./../message/Message";
 
 export default {
-    name: 'app-car-form-component',
-    props: ['car'],
-    components: {
-        'Message': Message
+  name: "app-car-form-component",
+  props: ["car"],
+  components: {
+    Message: Message
+  },
+
+  data() {
+    return {
+      brands: [],
+      carTypes: [],
+      showMessage: false
+    };
+  },
+
+  created() {
+    this.getBrands();
+    this.getCarTypes();
+  },
+
+  methods: {
+    getBrands() {
+      fetch("http://127.0.0.1:5000/py-vue/api/brands").then(res => {
+        res.json().then(res => {
+          this.brands = res.data;
+        });
+      });
     },
 
-    data() {
-        return {
-            brands: [],
-            showMessage: false
-        }
+    getCarTypes() {
+      fetch("http://127.0.0.1:5000/py-vue/api/car-type").then(res => {
+        res.json().then(res => {
+          this.carTypes = res.data;
+        });
+      });
     },
 
-    created() {
-        this.getBrands()
+    savenNewCar() {
+      if (this.car.carId) {
+        this.updateCar();
+        return;
+      }
+      this.saveCar();
     },
 
-    methods: {
+    saveCar() {
+      let data = JSON.stringify({ car: this.car });
+      fetch("http://127.0.0.1:5000/py-vue/api/cars", {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        body: data
+      }).then(res => {
+        res.json().then(res => {
+          console.log(res.data);
+          this.$emit("saved");
+          //flash('New Car Sucessfuly Saved !', 'success')
+          this.$router.push({ name: "app-cars-list" });
+        });
+      });
+    },
 
-        getBrands() {
-            fetch('http://127.0.0.1:5000/py-vue/api/brands')
-                .then(res => {
-                    res.json()
-                        .then(res => {
-                            this.brands = res.data
-                        })
-                })
-        },
-
-        savenNewCar() {
-            if (this.car.carId) {
-                this.updateCar();
-                return
-            }
-            this.saveCar()
-        },
-
-        saveCar() {
-            let data = JSON.stringify({ 'car': this.car });
-            fetch('http://127.0.0.1:5000/py-vue/api/cars', {
-                headers: { 'Content-Type': 'application/json' },
-                method: 'POST',
-                body: data,
-            }).then(res => {
-                res.json()
-                    .then(res => {
-                        console.log(res.data)
-                        this.$emit('saved')
-                        //flash('New Car Sucessfuly Saved !', 'success')
-                        this.$router.push({ name: 'app-cars-list' })
-                    })
-            })
-        },
-
-        updateCar() {
-            let data = JSON.stringify({ 'car': this.car });
-            fetch(`http://127.0.0.1:5000/py-vue/api/cars/${this.car.carId}`, {
-                headers: { 'Content-Type': 'application/json' },
-                method: 'PUT',
-                body: data,
-            }).then(res => {
-                res.json()
-                    .then(res => {
-                        console.log(res.data)
-                        this.$router.push({ name: 'app-cars-list' })
-                    })
-            })
-        }
-
+    updateCar() {
+      let data = JSON.stringify({ car: this.car });
+      fetch(`http://127.0.0.1:5000/py-vue/api/cars/${this.car.carId}`, {
+        headers: { "Content-Type": "application/json" },
+        method: "PUT",
+        body: data
+      }).then(res => {
+        res.json().then(res => {
+          console.log(res.data);
+          this.$router.push({ name: "app-cars-list" });
+        });
+      });
     }
-}
+  }
+};
 </script>
 
 <style>

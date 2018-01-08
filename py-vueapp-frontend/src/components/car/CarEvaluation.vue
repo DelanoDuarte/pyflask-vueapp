@@ -1,6 +1,8 @@
 <template>
     <div class="app-car-evaluation">
-        <h2>Car Evaluation </h2>
+        <div class="center-aling">
+          <h2>Car Evaluation </h2>
+        </div>
         <hr>
 
         <div class="row">
@@ -76,7 +78,9 @@ export default {
     };
   },
 
-  created() {
+  created() {},
+
+  mounted() {
     this.loadCarById();
   },
 
@@ -116,6 +120,10 @@ export default {
 <style scoped>
 .left-text {
   text-align: right;
+}
+
+.center-aling {
+  text-align: center;
 }
 .card {
   font-size: 1em;
