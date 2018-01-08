@@ -26,7 +26,7 @@ class CarResource(Resource):
 
         car = request.json['car']
         new_car = Car(car['model'], car['brand'],
-                      car['price'], car['year'], car['carType'])
+                      car['price'], car['year'], car['car_type'])
 
         car = carBusiness.saveCar(new_car)
 
@@ -51,7 +51,7 @@ class CarFindResource(Resource):
             'brand': car_request['brand'],
             'price': car_request['price'],
             'year': car_request['year'],
-            'car-type': car_request['car-type']
+            'car_type': car_request['car_type']
         }
 
         car_updated = self.carBusiness.updateCar(id, car_update)

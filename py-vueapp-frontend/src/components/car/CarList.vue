@@ -5,7 +5,32 @@
             <div align='center'>
                 <img src="https://cdn4.iconfinder.com/data/icons/transport-flat-icons-vol-1/256/39-128.png" width="128px" height="128px">
                 <br />
-                <h2>Car List </h2>
+                <h2>Cars</h2>
+            </div>
+            <hr>
+                
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                   
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <hr>
@@ -22,43 +47,40 @@
 </template>
 
 <script>
-import CarGridComponent from './CarGridComponent'
+import CarGridComponent from "./CarGridComponent";
 
 export default {
-    name: 'app-cars-list',
-    components: {
-        'CarGridComponent': CarGridComponent
+  name: "app-cars-list",
+  components: {
+    CarGridComponent: CarGridComponent
+  },
+
+  data() {
+    return {
+      cars: []
+    };
+  },
+
+  created() {
+    this.getCarsJson();
+  },
+
+  methods: {
+    getCarsJson() {
+      fetch("http://127.0.0.1:5000/py-vue/api/cars").then(res =>
+        res.json().then(res => {
+          this.cars = res.cars;
+        })
+      );
     },
 
-    data() {
-        return {
-            cars: []
-        }
+    refreshCarGrid() {
+      this.getCarsJson();
     },
 
-    created() {
-        this.getCarsJson();
-    },
-
-    methods: {
-
-        getCarsJson() {
-            fetch('http://127.0.0.1:5000/py-vue/api/cars')
-                .then(res => res.json()
-                    .then(res => {
-                        this.cars = res.cars
-                    }))
-        },
-
-        refreshCarGrid() {
-            this.getCarsJson();
-        },
-
-        showMessage() {
-
-        }
-    }
-}
+    showMessage() {}
+  }
+};
 </script>
 
 <style>
