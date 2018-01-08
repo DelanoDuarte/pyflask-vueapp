@@ -29,6 +29,7 @@ class CarBusiness:
                 'brand': car.brand,
                 'price': car.price,
                 'year': car.year,
+                'car_type': car.car_type,
                 'evaluated': False
             }
         )
@@ -39,6 +40,7 @@ class CarBusiness:
             'brand': car.brand,
             'price': car.price,
             'year': car.year,
+            'car_type': car.car_type,
             'evaluated': car.evaluated
         }
 
@@ -51,6 +53,7 @@ class CarBusiness:
             'brand': car['brand'],
             'price': car['price'],
             'year': car['year'],
+            'car_type': car['car_type'],
             'evaluated': car['evaluated']
         }
 
@@ -77,7 +80,11 @@ class CarBusiness:
             'brand': car['brand'],
             'price': car['price'],
             'year': car['year'],
+            'car_type': car['car_type'],
             'evaluated': car['evaluated']
         }
 
         return car_finded
+
+    def deleteCar(self, id):
+        self.carsDocument.delete_one({'_id': ObjectId(id)})

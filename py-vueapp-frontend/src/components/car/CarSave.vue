@@ -12,51 +12,51 @@
 </template>
 
 <script>
-import CarFormComponent from './CarFormComponent'
+import CarFormComponent from "./CarFormComponent";
 
 export default {
-    name: 'app-car-save',
-    components: {
-        'CarFormComponent': CarFormComponent
+  name: "app-car-save",
+  components: {
+    CarFormComponent: CarFormComponent
+  },
+
+  data() {
+    return {
+      title: "New Car",
+      car: {
+        model: "",
+        brand: "",
+        price: "",
+        year: undefined,
+        car_type: ""
+      }
+    };
+  },
+
+  created() {
+    this.checkEdit();
+  },
+
+  methods: {
+    checkEdit() {
+      let params = this.$route.params;
+      if (params.id) {
+        this.title = "Edit Car";
+        this.getCarById();
+      }
     },
 
-    data() {
-        return {
-            title: 'New Car',
-            car: {
-                model: '',
-                brand: '',
-                price: '',
-                year: undefined
-            }
-        }
-    },
-
-    created() {
-        this.checkEdit();
-    },
-
-    methods: {
-
-        checkEdit() {
-            let params = this.$route.params
-            if (params.id) {
-                this.title = 'Edit Car'
-                this.getCarById();
-            }
-        },
-
-        getCarById() {
-            fetch(`http://127.0.0.1:5000/py-vue/api/cars/${this.$route.params.id}`)
-                .then(res => res.json()
-                    .then(res => {
-                        this.car = res;
-                    }))
-        },
-
+    getCarById() {
+      fetch(
+        `http://127.0.0.1:5000/py-vue/api/cars/${this.$route.params.id}`
+      ).then(res =>
+        res.json().then(res => {
+          this.car = res;
+        })
+      );
     }
-
-}
+  }
+};
 </script>
 
 <style scoped>

@@ -25,7 +25,8 @@ class CarResource(Resource):
         carBusiness = CarBusiness()
 
         car = request.json['car']
-        new_car = Car(car['model'], car['brand'], car['price'], car['year'])
+        new_car = Car(car['model'], car['brand'],
+                      car['price'], car['year'], car['carType'])
 
         car = carBusiness.saveCar(new_car)
 
@@ -34,13 +35,10 @@ class CarResource(Resource):
 
 class CarFindResource(Resource):
 
-    mongoConnection = MongoConnection()
-    carsDocument = mongoConnection.mongoConnection['cars']
+    carBusiness = CarBusiness()
 
     def get(self, id):
-        carBusiness = CarBusiness()
-
-        car_finded = carBusiness.findCarById(id)
+        car_finded = self.carBusiness.findCarById(id)
 
         return car_finded, 200
 
@@ -52,20 +50,15 @@ class CarFindResource(Resource):
             'model': car_request['model'],
             'brand': car_request['brand'],
             'price': car_request['price'],
-            'year': car_request['year']
+            'year': car_request['year'],
+            'car-type': car_request['car-type']
         }
 
-        self.carsDocument.update_one(
-            {
-                '_id': ObjectId(id)
-            },
-            {
-                '$set': car_update
-            }
-        )
+        car_updated = self.carBusiness.updateCar(id, car_update)
 
-        return {'car': car_update}, 200
+        return {'car': car_updated}, 200
 
     def delete(self, id):
-        car_delete = self.carsDocument.delete_one({'_id': ObjectId(id)})
+
+        car_finded = self.carBusiness.deleteCar(id)
         return {'Brand': 'Brand Deleted'}, 200
