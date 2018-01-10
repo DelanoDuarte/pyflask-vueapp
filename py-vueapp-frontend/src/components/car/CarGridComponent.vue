@@ -7,6 +7,7 @@
                     <th>Brand</th>
                     <th>Car Price</th>
                     <th>Car Year</th>
+                    <th>Car Type</th>
                     <th></th>
                 </tr>
             </thead>
@@ -16,6 +17,7 @@
                     <td> {{car.brand.name}}</td>
                     <td> $ {{car.price}}</td>
                     <td> {{car.year}}</td>
+                    <td> {{car.car_type.name}}</td>
                     <td>
                         <div class="text-center">
                             <router-link :to="{name:'app-cars-edit', params:{'id':car._id}}" class="btn btn-success">Edit</router-link>

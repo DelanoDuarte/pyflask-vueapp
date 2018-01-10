@@ -13,14 +13,24 @@
                 <div class="col-sm-4">
                     <div class="card">
                         <div class="card-body">
-                            
+                            <div align='center'>
+                                <img src="https://image.flaticon.com/icons/png/512/196/196601.png" width="64px" height="64px">
+                                <hr>
+                                <h3>Chevrolet</h3>
+                                <p>Most Evaluated Brand</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="card">
                         <div class="card-body">
-                            
+                            <div align='center'>
+                                <img src="http://healthyteambucket.s3-website-us-east-1.amazonaws.com/profile/1314.png" width="64px" height="64px">
+                                <hr>
+                                <h3>BMW - IX300</h3>
+                                <p>Better Car Evaluation</p>
+                            </div>
                         </div>
                     </div>
                 </div>
