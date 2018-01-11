@@ -31,8 +31,30 @@ class CarEvaluationBusiness:
         return car_evaluation_saved
 
     def findById(self, id):
-        car_evaluation = self.carEvaluationDocument.find_one(
-            {'_id': ObjectId(id)})
+        car_evaluation = self.carEvaluationDocument.find_one({
+            '_id': ObjectId(id)
+        })
+
+        car_evaluation_Id = car_evaluation['_id'] = str(car_evaluation['_id'])
+
+        car_evaluation_finded = {
+            '_id': car_evaluation_Id,
+            'car': car_evaluation['car'],
+            'motor': car_evaluation['motor'],
+            'gas': car_evaluation['gas'],
+            'apparence': car_evaluation['apparence'],
+            'support': car_evaluation['support']
+        }
+
+        return car_evaluation_finded
+
+    def findByCarId(self, id):
+        car_evaluation = self.carEvaluationDocument.find_one({
+            'car._id': ObjectId(id)
+        })
+
+        print(car_evaluation)
+
         car_evaluation_Id = car_evaluation['_id'] = str(car_evaluation['_id'])
 
         car_evaluation_finded = {

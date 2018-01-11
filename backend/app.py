@@ -5,7 +5,7 @@ from flask_cors import CORS
 from HomeResource import HomeResource, TestHomeResource
 from resources.CarResource import CarResource, CarFindResource
 from resources.BrandResource import BrandResource, FindOneBrandResource
-from resources.CarEvaluationResource import CarEvaluationResource
+from resources.CarEvaluationResource import CarEvaluationResource, CarEvaluationFindOneResource, CarEvaluationFindByCar
 from resources.CarTypeResource import CarTypeResource
 
 
@@ -26,7 +26,8 @@ api.add_resource(FindOneBrandResource, '/brands/<string:id>')
 
 # Car Evaluation Resources
 api.add_resource(CarEvaluationResource, '/car-evaluation/<string:id>')
-
+api.add_resource(CarEvaluationFindOneResource, '/car-evaluation/<string:id>')
+api.add_resource(CarEvaluationFindByCar, '/car-evaluation/car/<string:id>')
 
 # Car Type Resources
 api.add_resource(CarTypeResource, '/car-type')

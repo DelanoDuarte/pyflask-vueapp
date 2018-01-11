@@ -20,10 +20,11 @@
                     <td> {{car.car_type.name}}</td>
                     <td>
                         <div class="text-center">
-                            <router-link :to="{name:'app-cars-edit', params:{'id':car._id}}" class="btn btn-success">Edit</router-link>
+                            <router-link :to="{name:'app-cars-edit', params:{'id':car._id}}" class="btn btn-warning">Edit</router-link>
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" @click="showModal(car)">Delete </button>
                             
                             <a v-if="car.evaluated">
+                                <router-link :to="{name:'app-cars-evaluation', params:{'id':car._id}}" class="btn btn-success" >Check Evaluation</router-link>                                
                                 <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-check-icon.png" width="36px" height="36px" data-toggle="tooltip" data-placement="top" title="Car Evaluated"/> 
                             </a>
                             <router-link :to="{name:'app-cars-evaluation', params:{'id':car._id}}" class="btn btn-primary"  v-if="!car.evaluated">Evaluate This Car</router-link>                            

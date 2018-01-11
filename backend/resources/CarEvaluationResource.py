@@ -33,3 +33,25 @@ class CarEvaluationResource(Resource):
             car_evaluation_object, car['_id'], car)
 
         return {'car-evaluation': car_evaluation}, 201
+
+
+class CarEvaluationFindOneResource(Resource):
+
+    carBusiness = CarBusiness()
+    carEvaluationBusiness = CarEvaluationBusiness()
+
+    def get(self, id):
+        car_evaluation = self.carEvaluationBusiness.findById(id)
+
+        return car_evaluation, 200
+
+
+class CarEvaluationFindByCar(Resource):
+
+    carBusiness = CarBusiness()
+    carEvaluationBusiness = CarEvaluationBusiness()
+
+    def get(self, id):
+        car_evaluation = self.carEvaluationBusiness.findByCarId(id)
+
+        return car_evaluation, 200
